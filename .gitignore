@@ -11,5 +11,5 @@ a.out
 *.swp
 .DS_Store
 
-# 注意：.idea/ 由 JetBrains 自帶 .idea/.gitignore 管控，這裡不整包忽略，
-# 以保留專案層級設定（如 codeStyle / inspectionProfiles）。
+# JetBrains IDE 設定（不入庫）
+.idea/
