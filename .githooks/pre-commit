@@ -1,0 +1,31 @@
+#!/bin/sh
+# ============================================================
+#  pre-commit：對本次 commit 中 src/ 下的 C++ 檔自動
+#    1) 套用 clang-format（若環境有安裝）
+#    2) 由 stamp.sh 蓋上修改者/時間/history
+#  再 re-stage，確保「即便忘記寫，commit 時一定被蓋章」。
+# ============================================================
+set -eu
+
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+files="$(git diff --cached --name-only --diff-filter=ACM \
+    -- 'src/*.cpp' 'src/*.cc' 'src/*.cxx' 'src/*.hpp' 'src/*.h' 'src/*.hh' 2>/dev/null || true)"
+
+[ -z "$files" ] && exit 0
+
+have_cf=0
+if command -v clang-format >/dev/null 2>&1; then
+    have_cf=1
+fi
+
+printf '%s\n' "$files" | while IFS= read -r f; do
+    [ -f "$f" ] || continue
+    if [ "$have_cf" -eq 1 ]; then
+        clang-format -i "$f" || true
+    fi
+    sh "$DIR/stamp.sh" "$f"
+    git add "$f"
+done
+
+exit 0

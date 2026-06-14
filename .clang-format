@@ -1,0 +1,26 @@
+# DSA_CPP_Template 統一格式化規則（clang-format 讀取）
+# 落地用：pre-commit hook 會在 commit 前自動套用。
+---
+Language:        Cpp
+BasedOnStyle:    Google
+Standard:        c++17
+
+IndentWidth:     4
+TabWidth:        4
+UseTab:          Never
+ColumnLimit:     100
+AccessModifierOffset: -4
+
+PointerAlignment: Left
+DerivePointerAlignment: false
+
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+SortIncludes:    true
+IncludeBlocks:   Regroup
+
+SpaceBeforeParens: ControlStatements
+NamespaceIndentation: None
+FixNamespaceComments: true
