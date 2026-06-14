@@ -1,14 +1,11 @@
 // ============================================================
-//  @file        fenwick_tree.cpp
-//  @category    資料結構 / tree / 樹狀數組
-//  @brief       前綴和查詢 + 單點加值
-//  @complexity  update/query O(log n) | 空間 O(n)
-//  @author      Aionyx <aionyxhuang@gmail.com>
-//  @created     2026-06-14
-//  @modified    2026-06-14  by aionyx
+//  fenwick_tree.cpp · Fenwick Tree (BIT)
+//  前綴和查詢 + 單點加值 · build O(n), query/update O(log n)
+//  @author   Aionyx <aionyxhuang@gmail.com>
+//  @modified 2026-06-14 by aionyx
 //  @history
-//    2026-06-14  Aionyx  初版
-//    2026-06-14  aionyx  修改
+//    2026-06-14 Aionyx 初版
+//    2026-06-14 aionyx 修改
 // ============================================================
 #pragma once
 

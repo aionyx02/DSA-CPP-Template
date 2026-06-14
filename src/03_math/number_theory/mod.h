@@ -1,15 +1,11 @@
 // ============================================================
-//  @file        mod.h
-//  @category    數學 / number_theory / 模運算
-//  @brief       模加減乘除與快速冪（含費馬小定理求模逆元）
-//  @complexity  pow_mod/div_mod O(log mod)，其餘 O(1)
-//  @note        依賴 <bits/stdc++.h>；mul_mod 使用 __int128_t 防溢位
-//  @author      Andy-0614 <andytest.0908@gmail.com>
-//  @created     2026-06-14
-//  @modified    2026-06-14  by aionyx
+//  mod.h · Modular Arithmetic (Modular Inverse, Fast Pow)
+//  模加減乘除 + 快速冪 + 模逆元 · pow/div O(log mod)
+//  @author   Andy-0614 <andytest.0908@gmail.com>
+//  @modified 2026-06-14 by aionyx
 //  @history
-//    2026-06-14  Andy-0614  初版（自 GitHub 匯入）
-//    2026-06-14  aionyx  修改
+//    2026-06-14 Andy-0614 初版（自 GitHub 匯入）
+//    2026-06-14 aionyx 修改
 // ============================================================
 #pragma once
 

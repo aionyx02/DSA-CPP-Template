@@ -3,6 +3,7 @@
 #  pre-commit：對本次 commit 中 src/ 下的 C++ 檔自動
 #    1) 套用 clang-format（若環境有安裝）
 #    2) 由 stamp.sh 蓋上修改者/時間/history
+#    3) 重新生成 INDEX.md 並一併納入本次 commit
 #  再 re-stage，確保「即便忘記寫，commit 時一定被蓋章」。
 # ============================================================
 set -eu
@@ -27,5 +28,9 @@ printf '%s\n' "$files" | while IFS= read -r f; do
     sh "$DIR/stamp.sh" "$f"
     git add "$f"
 done
+
+# 重新生成索引並納入 commit
+sh "$DIR/gen-index.sh" >/dev/null 2>&1 || true
+git add INDEX.md 2>/dev/null || true
 
 exit 0

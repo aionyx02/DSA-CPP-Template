@@ -29,28 +29,40 @@
 - include 由 clang-format 自動排序/分組，請勿手動逆序。
 - 換行 **LF**、檔尾留一個換行、去除行尾空白（`.editorconfig` 已設）。
 
-## 4. 每個 snippet 的硬性要求
+## 4. 精簡檔頭（硬性要求）
 
-1. **標準檔頭區塊**（見 `templates/snippet.cpp.tmpl`）——
-   含 `@file / @category / @brief / @complexity / @author / @created / @modified / @history`。
-   - `@author`、`@created`：建立時填一次，**不要事後改**（保留原作者）。
-   - `@modified`、`@history`：**別手動維護**，commit 時 hook 會自動蓋章。
-2. **複雜度標註**：在 `@complexity` 寫清楚時間/空間。
-3. **使用範例**：檔尾用 `// usage:` 區段，放一段可直接複製貼上跑的示範。
+採**精簡格式**：標題列用**專有名詞**（演算法/資料結構正式名稱），不要冗長描述。
+共 6 個欄位、固定順序，模板見 `templates/snippet.cpp.tmpl`：
+
+```
+// ============================================================
+//  <檔名> · <專有名詞，如 Fenwick Tree (BIT)>
+//  <一句話說明> · <複雜度，如 O(log n)>
+//  @author   <原作者 name <email>>     ← 建立填一次，hook 不覆蓋
+//  @modified <date> by <name>          ← hook 自動更新
+//  @history                            ← hook 自動維護，每人每日一行
+//    <date> <name> <摘要>
+// ============================================================
+```
+
+規則：
+- **標題列以專有名詞為主**，分類資訊靠資料夾路徑表達（不再放 `@category`）。
+- `@author`：原作者，建立後**不要改**；`@modified` / `@history`：**別手動維護**，commit 時 hook 自動蓋章。
+- 依賴 `<bits/stdc++.h>` / `using namespace std` 的競賽型 snippet，於說明列或 `// usage:` 註明即可，不另設欄位。
+- 檔尾建議用 `// usage:` 放一段可直接複製貼上跑的示範。
+
+> 找 snippet 用 `INDEX.md`（自動生成的總表）或 `scripts/find.ps1 <關鍵字>`，不必逐層翻資料夾。
 
 ## 5. 一個合格 snippet 長這樣
 
 ```cpp
 // ============================================================
-//  @file        fenwick_tree.cpp
-//  @category    資料結構 / tree / 樹狀數組
-//  @brief       前綴和查詢 + 單點加值
-//  @complexity  update/query O(log n) | 空間 O(n)
-//  @author      Aionyx <aionyxhuang@gmail.com>
-//  @created     2026-06-14
-//  @modified    2026-06-14  by Aionyx
+//  fenwick_tree.cpp · Fenwick Tree (BIT)
+//  前綴和查詢 + 單點加值 · build O(n), query/update O(log n)
+//  @author   Aionyx <aionyxhuang@gmail.com>
+//  @modified 2026-06-14 by Aionyx
 //  @history
-//    2026-06-14  Aionyx  初版
+//    2026-06-14 Aionyx 初版
 // ============================================================
 #pragma once
 

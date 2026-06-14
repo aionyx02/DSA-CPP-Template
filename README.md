@@ -29,9 +29,23 @@ git add . ; git commit -m "feat(ds/tree): 線段樹"
 
 > 子分類可自由擴充：開新資料夾並補一個 `.gitkeep` 即可。
 
+## 快速查找
+
+不用逐層翻資料夾：
+
+```powershell
+# 關鍵字搜尋（比對檔名 / 專有名詞 / 說明 / 作者）
+./scripts/find.ps1 "binary search"
+./scripts/find.ps1 mod
+```
+
+或直接開 [`INDEX.md`](INDEX.md) —— 自動生成的總表，一行一個 snippet，Ctrl+F 即可。
+（`INDEX.md` 由 pre-commit hook 自動更新，免手動維護。）
+
 ## 文件
 
-- [`STYLE.md`](STYLE.md) — coding style（命名 / 格式 / 檔頭規範）。
+- [`INDEX.md`](INDEX.md) — 所有 snippet 的自動索引表。
+- [`STYLE.md`](STYLE.md) — coding style（命名 / 格式 / 精簡檔頭規範）。
 - [`CONTRIBUTING.md`](CONTRIBUTING.md) — 如何新增 snippet、署名機制細節、如何用 git 回溯。
 
 ## 署名 / 痕跡追蹤（本庫特色）
