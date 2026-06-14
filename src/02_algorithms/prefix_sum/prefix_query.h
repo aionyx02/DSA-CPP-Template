@@ -1,3 +1,18 @@
+// ============================================================
+//  @file        prefix_query.h
+//  @category    演算法 / prefix_sum / 前綴和
+//  @brief       1D/2D 前綴和建表與 O(1) 區間/子矩陣查詢
+//  @complexity  建表 O(nm) | 查詢 O(1)
+//  @author      Andy-0614 <andytest.0908@gmail.com>
+//  @created     2026-06-14
+//  @modified    2026-06-14  by aionyx
+//  @history
+//    2026-06-14  Andy-0614  初版（自 GitHub 匯入）
+//  @note        依賴 <bits/stdc++.h> + using namespace std
+//    2026-06-14  aionyx  修改
+// ============================================================
+#pragma once
+
 void prefixSum1D(const vector<int>& arr, vector<int>& prefix) {
     int n = arr.size();
     prefix.assign(n + 1, 0);
