@@ -20,9 +20,11 @@
     - [`mul_mod`](#mul_mod)
     - [`pow_mod`](#pow_mod)
     - [`div_mod`](#div_mod)
-  - [5. prefix\_suffix.h](#5-prefix_suffixh)
-    - [`prefixSum`](#prefixsum)
-    - [`suffixSum`](#suffixsum)
+  - [5. prefix\_query.h](#5-prefix_queryh)
+    - [`prefixSum1D`](#prefixsum1d)
+    - [`querySum1D`](#querysum1d)
+    - [`prefixSum2D`](#prefixsum2d)
+    - [`querySum2D`](#querysum2d)
   - [6. prime.h](#6-primeh)
     - [`isPrime`](#isprime)
     - [`primeRangeNumber`](#primerangenumber)
@@ -71,7 +73,7 @@
 * **input**
   * `vector<vector<pair<int, int>>>& adj`：圖的鄰接串列，記錄每個節點與其相鄰節點、邊權重的對應關係。
   * `int root`：邊的起點節點編號。
-  * `int child`：邊的終點節點編號.
+  * `int child`：邊的終點節點編號。
   * `int weight`：該條邊的權重值。
 * **describe**
   * 在有向圖的鄰接串列中，從指定的起點節點（`root`）向終點節點（`child`）加入一條帶有權重（`weight`）的有向邊。
@@ -93,7 +95,7 @@
 * **input**
   * `vector<vector<pair<int, int>>>& adj`：圖的鄰接串列。
   * `int node`：廣度優先搜尋的起始節點編號。
-  * `vector<bool>& visited`：記錄各個節點是否已被訪問過的狀態陣列.
+  * `vector<bool>& visited`：記錄各個節點是否已被訪問過的狀態陣列。
   * `bool clear`：可選參數，用來決定在搜尋前是否要重設走訪狀態（預設為 `false`）。
 * **describe**
   * 運用廣度優先搜尋（BFS）策略，藉由佇列（Queue）來輔助實現層序走訪。走訪時由近到遠擴展相鄰節點，並在取出佇列元素時將其數值輸出。
@@ -117,8 +119,8 @@
 ### `sub_mod`
 * **input**
   * `long long a`：被減數。
-  * `long long b`：減數.
-  * `long long mod`：取模基數。
+  * `long long b`：減數。
+  * `long long mod`：取模基數.
 * **describe**
   * 計算兩數相減並取模的結果。先處理輸入的正負號，在相減前進行大小判定，若被減數小於減數，則補上一個模數再進行減法，以確保結果不會出現負數。
 * **output**
@@ -156,25 +158,45 @@
 
 ---
 
-## 5. prefix_suffix.h
+## 5. prefix_query.h
 
-### `prefixSum`
+### `prefixSum1D`
 * **input**
-  * `vector<int>& arr`：原始輸入的資料陣列。
-  * `vector<int>& prefix`：用來接收前綴和計算結果的目標容器。
+  * `const vector<int>& arr`：原始輸入的 1D 資料陣列。
+  * `vector<int>& prefix`：用來接收字首和計算結果的目標容器。
 * **describe**
-  * 計算輸入陣列的前綴和（Prefix Sum）。每個位置的新數值等於陣列開頭到該當前位置所有元素的總和，可用於後續單次查詢區間和。
+  * 建構 1D 陣列的字首和。為方便處理邊界，`prefix` 空間會被調整為 $N+1$ 大小。每個位置 `prefix[i]` 代表原陣列前 $i$ 個元素的總和。
 * **output**
   * `void`：無回傳值，計算結果直接填充至傳入的 `prefix` 陣列中。
 
-### `suffixSum`
+### `querySum1D`
 * **input**
-  * `vector<int>& arr`：原始輸入的資料陣列。
-  * `vector<int>& suffix`：用來接收後綴和計算結果的目標容器。
+  * `const vector<int>& prefix`：已建構完成的 1D 字首和陣列。
+  * `int L`：欲查詢區間的左界索引（0-indexed）。
+  * `int R`：欲查詢區間的右界索引（0-indexed，包含此位置）。
 * **describe**
-  * 計算輸入陣列的後綴和（Suffix Sum）。從陣列尾端向前端進行累加，每個位置的新數值等於當前位置到陣列最末端所有元素的總和。
+  * 利用已建構的字首和陣列，以 $O(1)$ 的時間複雜度快速查詢原陣列在閉區間 $[L, R]$ 內的元素總和。
 * **output**
-  * `void`：無回傳值，計算結果直接填充至傳入的 `suffix` 陣列中。
+  * `int`：回傳該區間內的元素總和。
+
+### `prefixSum2D`
+* **input**
+  * `const vector<vector<int>>& arr`：原始輸入的 2D 二維資料矩陣。
+  * `vector<vector<int>>& prefix`：用來接收 2D 字首和計算結果的目標容器。
+* **describe**
+  * 運用二維動態規劃與排容原理建構 2D 字首和矩陣。為了完美避開邊界條件判斷，`prefix` 的大小會被調整為 $(N+1) \times (M+1)$，其中 `prefix[i][j]` 代表原矩陣從左上角 $(0,0)$ 到右下角 $(i-1, j-1)$ 的子矩陣總和。
+* **output**
+  * `void`：無回傳值，計算結果直接填充至傳入的 `prefix` 二維陣列中。
+
+### `querySum2D`
+* **input**
+  * `const vector<vector<int>>& prefix`：已建構完成的 2D 字首和矩陣。
+  * `int row1`、`int col1`：欲查詢子矩陣的左上角座標（0-indexed）。
+  * `int row2`、`int col2`：欲查詢子矩陣的右下角座標（0-indexed）。
+* **describe**
+  * 基於排容原理，利用已建構的二維字首和矩陣，以 $O(1)$ 的時間複雜度精準計算並彈出任意指定子矩陣範圍內的數值總和。
+* **output**
+  * `int`：回傳該子矩陣範圍內的數值總和。
 
 ---
 
