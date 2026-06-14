@@ -1,4 +1,4 @@
-# 安裝 git hooks（Windows / PowerShell）
+﻿# 安裝 git hooks（Windows / PowerShell）
 # 把 hooksPath 指向版控內的 .githooks，所有人 clone 後跑一次即可。
 $ErrorActionPreference = "Stop"
 

@@ -19,17 +19,23 @@ sh ./scripts/install-hooks.sh
 > hook 在 Windows 上透過 Git for Windows 內附的 `sh` 執行，無需額外安裝。
 > `clang-format` 為**選用**：有裝就自動格式化，沒裝只跳過格式化、署名章照蓋。
 
-## 1. 新增一個 snippet
+## 1. 找 / 新增 snippet
 
-建議用腳本產生（檔頭會自動填好）：
+**找**（不用逐層翻資料夾）：開 `INDEX.md`（自動生成總表）或
+
+```powershell
+./scripts/find.ps1 "binary search"     # 比對檔名 / 專有名詞 / 說明 / 作者
+```
+
+**新增**（檔頭自動填好，採精簡格式）：
 
 ```powershell
 ./scripts/new-snippet.ps1 -Path 01_data_structures/tree -Name segment_tree `
-    -Brief "區間查詢 + 單點更新" -Complexity "build O(n) | query/update O(log n)"
+    -Term "Segment Tree" -Brief "區間查詢 + 單點更新" -Complexity "build O(n), query/update O(log n)"
 ```
 
-`-Path` 是相對 `src/` 的分類資料夾，`-Name` 是檔名（不含副檔名）。
-手寫也可以，但**檔頭區塊不可省**（格式見 `templates/snippet.cpp.tmpl` 與 `STYLE.md`）。
+`-Path` 相對 `src/` 的分類資料夾，`-Name` 檔名（不含副檔名），`-Term` 標題列的**專有名詞**。
+手寫也可以，但**精簡檔頭不可省**（格式見 `STYLE.md` §4 與 `templates/snippet.cpp.tmpl`）。
 
 ## 2. 分類放哪裡
 
@@ -70,9 +76,14 @@ src/
 
 1. 若有 `clang-format` → 自動格式化。
 2. 由 `.githooks/stamp.sh` 蓋上 / 更新檔頭署名章。
-3. 自動 re-stage。
+3. 由 `.githooks/gen-index.sh` 重新生成 `INDEX.md`。
+4. 自動 re-stage（含 `INDEX.md`）。
 
-所以你 commit 後，檔案內容可能比你 `git add` 時多了署名章——這是預期行為。
+所以你 commit 後，檔案內容可能比你 `git add` 時多了署名章、`INDEX.md` 也會更新——這是預期行為。
+
+> **編輯 `scripts/*.ps1` 注意**：請用會保留 **UTF-8 BOM** 的編輯器（VS Code / CLion 預設可）。
+> Windows PowerShell 5.1 讀無 BOM 的 UTF-8 + 中文會解碼錯亂導致腳本壞掉。若壞了，用
+> `Get-Content` 讀回再以 `New-Object System.Text.UTF8Encoding($true)` 寫回即可修復。
 
 ## 5. 提交訊息
 
