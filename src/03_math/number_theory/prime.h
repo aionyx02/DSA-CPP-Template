@@ -3,12 +3,12 @@
 //  @category    數學 / number_theory / 質數
 //  @brief       單一質數判定 + 區間質數篩（埃氏篩）
 //  @complexity  isPrime O(√n) | primeRangeNumber O(R log log R)
+//  @note        依賴 <bits/stdc++.h> + using namespace std
 //  @author      Andy-0614 <andytest.0908@gmail.com>
 //  @created     2026-06-14
 //  @modified    2026-06-14  by aionyx
 //  @history
 //    2026-06-14  Andy-0614  初版（自 GitHub 匯入）
-//  @note        依賴 <bits/stdc++.h> + using namespace std
 //    2026-06-14  aionyx  修改
 // ============================================================
 #pragma once

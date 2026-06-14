@@ -3,12 +3,12 @@
 //  @category    資料結構 / graph / 圖走訪
 //  @brief       加權鄰接串列的建邊與 DFS / BFS 走訪
 //  @complexity  O(V + E)
+//  @note        依賴 <bits/stdc++.h> + using namespace std
 //  @author      Andy-0614 <andytest.0908@gmail.com>
 //  @created     2026-06-14
 //  @modified    2026-06-14  by aionyx
 //  @history
 //    2026-06-14  Andy-0614  初版（自 GitHub 匯入）
-//  @note        依賴 <bits/stdc++.h> + using namespace std
 //    2026-06-14  aionyx  修改
 // ============================================================
 #pragma once

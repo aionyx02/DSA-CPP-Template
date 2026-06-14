@@ -3,12 +3,12 @@
 //  @category    演算法 / searching / 二分搜尋
 //  @brief       已排序陣列中找相等值 / 第一個大於 target 的位置
 //  @complexity  O(log n)
+//  @note        依賴 <bits/stdc++.h> + using namespace std
 //  @author      Andy-0614 <andytest.0908@gmail.com>
 //  @created     2026-06-14
 //  @modified    2026-06-14  by aionyx
 //  @history
 //    2026-06-14  Andy-0614  初版（自 GitHub 匯入）
-//  @note        依賴 <bits/stdc++.h> + using namespace std
 //    2026-06-14  aionyx  修改
 // ============================================================
 #pragma once
